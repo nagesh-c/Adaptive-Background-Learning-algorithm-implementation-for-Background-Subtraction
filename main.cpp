@@ -11,7 +11,7 @@ int main(int argc,char **argv)
 {
 	Mat frame_aux,frame;
 	int width,height,resize_factor=100,key = 0;
-	VideoCapture cap("E:\\Moving Object Tracking under Water Video Sequence\\videos\\AF004_0136(S).mov");
+	VideoCapture cap(argv[1]);
 	if(!cap.isOpened())
 	{
 		cout<<"error cannot openfile"<<endl;
