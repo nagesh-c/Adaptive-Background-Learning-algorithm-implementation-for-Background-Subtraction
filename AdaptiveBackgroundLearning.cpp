@@ -18,22 +18,6 @@ AdaptiveBackgroundLearning::~AdaptiveBackgroundLearning()
   std::cout << "~AdaptiveBackgroundLearning()" << std::endl;
 }
 
-void displayFinal(Mat &img_foreground,Mat &img_background)
-{
-	Size s1 = img_foreground.size();
-	Size s2 = img_background.size();
-	Mat frame(s1.height,s1.width+s2.width,CV_8UC3);
-	Mat temp_img_foreground;
-	cvtColor(img_foreground,temp_img_foreground,CV_GRAY2BGR,0);
-	string name = "foreground module";
-	
-	Mat left(frame,Rect(0,0,s1.width,s1.height));
-	Mat right(frame,Rect(s1.width,0,s2.width,s2.height));
-	temp_img_foreground.copyTo(left);
-	img_background.copyTo(right);
-	//putText(img_background, name.c_str(), cv::Point(15,15), FONT_HERSHEY_SIMPLEX, 0.5 , cv::Scalar(0,0,0));
-	imshow("Final Output",frame);
-}
 void AdaptiveBackgroundLearning::process(const cv::Mat &img_input, cv::Mat &img_output, cv::Mat &img_bgmodel)
 {
   char path1[1000],path2[1000];
@@ -81,19 +65,11 @@ void AdaptiveBackgroundLearning::process(const cv::Mat &img_input, cv::Mat &img_
   
   if(showForeground){
     cv::imshow("A-Learning FG", img_foreground);
-	//sprintf(path1,"F:\\frames\\frames%d.jpg",i);
-	//imwrite(path1,img_foreground);
   }
   if(showBackground){
     cv::imshow("A-Learning BG", img_background);
-	//sprintf(path2,"F:\\frames\\bkframes%d.jpg",j);
-	//imwrite(path2,img_background);
   }
-  //i = i + 1;
-  //j = j + 1;
   
-  //displayFinal(img_foreground,img_background);
-
   img_foreground.copyTo(img_output);
   img_background.copyTo(img_bgmodel);
 
@@ -116,7 +92,7 @@ void AdaptiveBackgroundLearning::saveConfig()
 
 void AdaptiveBackgroundLearning::loadConfig()
 {
-  CvFileStorage* fs = cvOpenFileStorage("E:\\AdaptiveBackgroundLearning.xml", 0, CV_STORAGE_READ);
+  CvFileStorage* fs = cvOpenFileStorage("AdaptiveBackgroundLearning.xml", 0, CV_STORAGE_READ);
   
   alpha = cvReadRealByName(fs, 0, "alpha", 0.05);
   limit = cvReadIntByName(fs, 0, "limit", -1);
