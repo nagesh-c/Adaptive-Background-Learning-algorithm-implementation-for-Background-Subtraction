@@ -5,7 +5,8 @@ To execute :
 	g++ -o output main.cpp AAdaptiveBackgroundLearning.cpp
 	./output.out "videofile_path"
 Or
-	in `main.cpp`, change VideoCapture call to class to `0`, to apply for real camera.
+
+in `main.cpp`, change VideoCapture call initialization to `0`, to apply for real camera.
 
 
 Output will be:
