@@ -10,6 +10,7 @@ in `main.cpp`, change VideoCapture call initialization to `0`, to apply for real
 
 
 Output will be:
+
 	 Input Window
 	 Background Subtracted Window
 	 Modeling Window.
